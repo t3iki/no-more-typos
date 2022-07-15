@@ -1,0 +1,45 @@
+<div class="game">
+    <!-- level mode -->
+    <div class="levels">
+        <button [ngClass]="gameText.level === 'easy' ? 'active' : ''" (click)="changeLevel('easy')">Easy</button>
+        <button [ngClass]="gameText.level === 'normal' ? 'active' : ''" (click)="changeLevel('normal')">Normal</button>
+        <button [ngClass]="gameText.level === 'hard' ? 'active' : ''" (click)="changeLevel('hard')">Hard</button>
+    </div>
+    <div class="timer">
+        <ng-container *ngIf="gameStarted">
+            <span>Time elapsed</span>
+            <h3>{{ timeLeft.toFixed(1) }} seconds</h3>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="!gameFinished">
+        <p class="game-text">
+            <ng-container *ngFor="let word of gameText.text.split(' '); let i = index">
+                &nbsp;
+                <span [className]="compare(word, enteredTextArr[i])" [ngClass]="compareActiveWord(i)">{{ word }}</span>
+                &nbsp;
+            </ng-container>
+        </p>
+    </ng-container>
+    <ng-container *ngIf="!gameFinished">
+        <input (input)="verifyText($event.target)" (click)="startTimer()" type="text" class="game-input" />
+    </ng-container>
+    <div class="best-score" *ngIf="gameText.bestScore > 0 && gameLost === false">
+        <span>Best score</span>
+        <h3>{{ gameText.bestScore.toFixed(1) }} seconds</h3>
+    </div>
+    <div class="lost" *ngIf="gameLost">
+        <span>I'm sorry</span>
+        <h3>YOU LOST</h3>
+    </div>
+    <ng-container *ngIf="gameFinished">
+        <div class="percentage">
+            <span>Accuracy</span>
+            <h3>{{ ((correctWords / gameText.text.split(' ').length) * 100).toFixed(1) }}%</h3>
+        </div>
+    </ng-container>
+    <button *ngIf="gameStarted" class="retry" (click)="resetGame()">Retry</button>
+    <div class="rules" *ngIf="rounds < 3">
+        <span>TYPE THE TEXT ABOVE THE GREEN LINE</span>
+        <span>press enter after each word to continue</span>
+    </div>
+</div>

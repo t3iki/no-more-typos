@@ -1,1 +1,316 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+$bgColor: #000;
+$accentColor: #46C016;
+$textColor: #fff;
+$darkGray: #63666A;
+$red: #ff3333;
+
+@mixin align($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Roboto Mono', monospace;
+    font-size: 62.5%; // 10px = 1rem
+    color: $textColor;
+}
+
+
+body {
+    background: $bgColor;
+}
+
+.container {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+nav {
+    @include align(row, space-between, center);
+    padding: 1.5rem 0;
+    height: 10vh;
+    // background-color: #ff3333;
+
+    .title {
+        color: $textColor;
+        font-size: 3rem;
+    }
+
+    .links {
+        width: 250px;
+        @include align(row, space-between, center);
+
+        .link {
+            color: $textColor;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+
+            border: 2px solid black;
+            padding: 0.5rem 1rem;
+
+            cursor: pointer;
+            transition-duration: 0.2s;
+
+            &:hover {
+                border-color: $accentColor;
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+
+        .active {
+            background-color: $accentColor;
+            border-color: $accentColor;
+
+            &:hover {
+                background-color: $bgColor;
+            }
+        }
+    }
+}
+
+.home {
+    @include align(column, center, center);
+    row-gap: 1.5rem;
+    height: 80vh;
+
+    .intro-text {
+        font-size: 5.2rem;
+    }
+
+    .intro-description {
+        font-size: 3.5rem;
+        text-transform: capitalize;
+    }
+
+    .intro-btn {
+        background: none;
+        border: 0.3rem solid $accentColor;
+        padding: 1rem 1.5rem;
+        margin: 1rem;
+        
+        font-size: 4rem;
+        color: $accentColor;
+        text-transform: uppercase;
+        text-decoration: none;
+        
+        cursor: pointer;
+        transition-duration: 0.2s;
+
+        &:hover {
+            background-color: $accentColor;
+            color: $textColor;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+.game {
+    min-height: 80vh;
+    height: auto;
+    
+    @include align(column, start, center);
+
+    .levels {
+        height: 50px;
+        margin: 10px 0;
+        @include align(row, space-between, center);
+
+        button {
+            color: $accentColor;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+
+            border: 2px solid $accentColor;
+            padding: 0.5rem 1rem;
+            margin: 0 1rem;
+            background: none;
+
+            cursor: pointer;
+            transition-duration: 0.2s;
+
+            &:hover {
+                border-color: $accentColor;
+                background-color: $accentColor;
+                color: $textColor;
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
+        }
+    
+        .active {
+            background-color: $accentColor;
+            border-color: $accentColor;
+            color: $textColor;
+
+            &:hover {
+                background-color: $bgColor;
+            }
+        }
+    }
+
+    .game-text {
+        text-align: center;
+        line-height: 4.5rem;
+
+        span {
+            font-size: 3.5rem;
+            color: $darkGray;
+        }
+        
+        small {
+            font-size: 3.5rem;
+            color: $darkGray;
+        }
+
+        .correct {
+            color: $accentColor;
+        }
+
+        .incorrect {
+            color: $red;
+        }
+        
+        margin-bottom: 2rem;
+    }
+
+    .game-input {
+        font-size: 3rem;
+        color: $textColor;
+        text-align: center;
+
+        width: 300px;
+        padding: 10px 0;
+        background: none;
+        border: none;
+        border-bottom: 2px solid $accentColor;
+        outline: 0;
+    }
+
+    .retry {
+        color: $accentColor;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        font-weight: 500;
+
+        border: 2px solid $accentColor;
+        padding: 0.5rem 1rem;
+        background: none;
+        margin: 3rem 0;
+
+        cursor: pointer;
+        transition-duration: 0.2s;
+
+        &:hover {
+            border-color: $accentColor;
+            background-color: $accentColor;
+            color: $textColor;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+.timer,
+.percentage,
+.best-score,
+.lost,
+.rules {
+    height: 100px;
+    margin: 1rem;
+    @include align(column, center, center);
+
+    span,
+    h3 {
+        color: $accentColor;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 3.5rem;
+    }
+}
+
+.active-word {
+    border-bottom: 0.35rem solid $accentColor;
+    padding: 5px 0;
+}
+ 
+.contacts {
+    @include align(row, center, center);
+    height: 10vh;
+
+    i {
+        color: $accentColor;
+        font-size: 40px;
+    }
+
+    img {
+        height: 40px;
+    }
+
+    i,
+    img {
+        margin: 0 20px;
+
+        transition-duration: 0.15s;
+
+        &:hover {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    * {
+        font-size: 55%;
+    }
+
+    .container {
+        max-width: 1040px;
+        padding: 0px 2rem !important;
+        width: auto;
+    }
+
+    nav {
+        padding: 0px 2rem !important;
+        .links {
+            width: auto;
+            .link {
+                margin: 0 1rem;
+            }
+        }
+    }
+
+    .home {
+        text-align: center;
+    }
+}
